@@ -30,10 +30,7 @@ app.use('/api/subscription', require('./routes/subscription'));
 app.use('/api/admin', require('./routes/admin'));
 
 app.get('/api/health', (req, res) => res.json({ status: 'OK', timestamp: new Date() }));
-app.use(express.static(path.join(__dirname, '/frontend/dist'))); // Serve React build
-app.get('*', (_, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ success: false, message: err.message || 'Server Error' });
