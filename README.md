@@ -189,7 +189,7 @@ Response
 
 ```env
 # MongoDB Connection
-MONGO_URI=mongodb+srv://user:password@cluster.mongodb.net/golf-charity
+MONGO_URI=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 # JWT Authentication
 JWT_SECRET=your_super_secret_jwt_key_min_32_chars
