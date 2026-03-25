@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const connectDB = require('./config/db');
-const path = require('path');
+
 const app = express();
 connectDB();
 
@@ -14,7 +14,14 @@ app.use('/api/subscription/webhook', express.raw({ type: 'application/json' }));
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000', credentials: true }));
+app.use(cors({ 
+  origin: [
+    'http://localhost:3000',
+    'https://golf-frontend-roan.vercel.app',
+    process.env.CLIENT_URL
+  ].filter(Boolean), 
+  credentials: true 
+}));
 app.use(helmet());
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
