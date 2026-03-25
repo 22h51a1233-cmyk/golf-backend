@@ -1,0 +1,10 @@
+const express = require('express');
+const r = express.Router();
+const c = require('../controllers/scoreController');
+const { protect, requireSubscription } = require('../middleware/auth');
+r.use(protect, requireSubscription);
+r.get('/', c.getScores);
+r.post('/', c.addScore);
+r.put('/:scoreId', c.updateScore);
+r.delete('/:scoreId', c.deleteScore);
+module.exports = r;

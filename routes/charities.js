@@ -1,0 +1,10 @@
+const express = require('express');
+const r = express.Router();
+const c = require('../controllers/charityController');
+const { protect, adminOnly } = require('../middleware/auth');
+r.get('/', c.getCharities);
+r.get('/:id', c.getCharity);
+r.post('/', protect, adminOnly, c.createCharity);
+r.put('/:id', protect, adminOnly, c.updateCharity);
+r.delete('/:id', protect, adminOnly, c.deleteCharity);
+module.exports = r;

@@ -1,0 +1,12 @@
+const express = require('express');
+const r = express.Router();
+const c = require('../controllers/adminController');
+const { protect, adminOnly } = require('../middleware/auth');
+r.use(protect, adminOnly);
+r.get('/users', c.getUsers);
+r.get('/users/:id', c.getUser);
+r.put('/users/:id', c.updateUser);
+r.delete('/users/:id', c.deleteUser);
+r.get('/analytics', c.getAnalytics);
+r.get('/winners', c.getAllWinners);
+module.exports = r;

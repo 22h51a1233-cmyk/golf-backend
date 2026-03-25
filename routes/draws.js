@@ -1,0 +1,15 @@
+const express = require('express');
+const r = express.Router();
+const c = require('../controllers/drawController');
+const { protect, adminOnly, requireSubscription } = require('../middleware/auth');
+r.get('/', c.getDraws);
+r.get('/upcoming', c.getUpcomingDraw);
+r.get('/my-winnings', protect, requireSubscription, c.getMyWinnings);
+r.get('/admin/all', protect, adminOnly, c.adminGetDraws);
+r.get('/:id', c.getDraw);
+r.post('/', protect, adminOnly, c.createDraw);
+r.post('/:id/simulate', protect, adminOnly, c.simulateDraw);
+r.post('/:id/publish', protect, adminOnly, c.publishDraw);
+r.put('/:drawId/winners/:winnerId/verify', protect, adminOnly, c.verifyWinner);
+r.put('/:drawId/winners/:winnerId/pay', protect, adminOnly, c.markPaid);
+module.exports = r;
